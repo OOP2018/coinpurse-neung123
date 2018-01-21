@@ -18,7 +18,6 @@ public class Purse {
      */
     private final int capacity;
 
-
     /**
      *  Create a purse with a specified capacity.
      *  @param capacity is maximum number of coins you can put in purse.

@@ -3,6 +3,11 @@ package coinpurse;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A class for testing Coin.
+ *
+ * @author Pornpavee Seri-umnuoy
+ */
 public class MoneyUtil {
 
     public static void main(String[] arg){
