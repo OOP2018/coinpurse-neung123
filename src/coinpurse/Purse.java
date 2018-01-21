@@ -115,7 +115,7 @@ public class Purse {
         Coin [] array = new Coin[ templist.size() ];
         templist.toArray(array);
 
-		for (int i = 0;  i < money.size(); i++){
+		for (int i = 0;  i < templist.size(); i++){
 		    money.remove( templist.get(i));
         }
         return array;
