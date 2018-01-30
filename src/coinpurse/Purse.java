@@ -22,7 +22,7 @@ public class Purse {
      *  Create a purse with a specified capacity.
      *  @param capacity is maximum number of coins you can put in purse.
      */
-    public Purse( int capacity ) {
+    public Purse(int capacity) {
         this.capacity = capacity;
         money = new ArrayList<Coin>(capacity);
     }
@@ -74,7 +74,7 @@ public class Purse {
      * @param coin is a Coin object to insert into purse
      * @return true if coin inserted, false if can't insert
      */
-    public boolean insert( Coin coin ) {
+    public boolean insert(Coin coin) {
         // if the purse is already full then can't insert anything.
         if(isFull() || coin.getValue() <= 0) return false;
 
@@ -90,10 +90,10 @@ public class Purse {
      *  @return array of Coin objects for money withdrawn,
 	 *    or null if cannot withdraw requested amount.
      */
-    public Coin[] withdraw( double amount ) {
+    public Coin[] withdraw(double amount) {
 
         List<Coin> templist = new ArrayList<>();
-        if ( amount > 0 ) {
+        if (amount > 0) {
             java.util.Collections.sort(money);
 
             double amountNeededToWithdraw = amount;

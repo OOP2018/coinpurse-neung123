@@ -15,7 +15,7 @@ public class Coin implements  Comparable<Coin>{
      * @param CURRENCY is the coin's currency.
      */
     public  Coin(double value,String CURRENCY){
-        if( value<0 ) value = 0;
+        if(value < 0) value = 0;
         this.value = value;
         this.CURRENCY = CURRENCY;
     }
@@ -30,7 +30,7 @@ public class Coin implements  Comparable<Coin>{
     /**
      * @return the currency of this coin.
      */
-    public String getCURRENCY() {
+    public String getCurrency() {
         return CURRENCY;
     }
 
@@ -39,7 +39,7 @@ public class Coin implements  Comparable<Coin>{
      */
     @Override
     public String toString() {
-        if(((int) value)- value == 0 ) return String.format("%.0f-%s",value,CURRENCY);
+        if(((int) value) - value == 0) return String.format("%.0f-%s",value,CURRENCY);
         else return String.format("%.2f-%s",value,CURRENCY);
     }
 
