@@ -3,15 +3,15 @@ package coinpurse;
 import java.util.*;
 
 /**
- *  A coin purse contains coins.
- *  You can insert coins, withdraw money, check the balance,
+ *  A purse contains money.
+ *  You can insert money, withdraw money, check the balance,
  *  and check if the purse is full.
  *
  *  @author Pornpavee Seri-umnuoy
  */
 public class Purse {
     /** Collection of objects in the purse. */
-    List<Coin> money = new ArrayList<Coin>();
+    List<Valuable> money = new ArrayList<Valuable>();
 
     /** Capacity is maximum number of items the purse can hold.
      *  Capacity is set when the purse is created and cannot be changed.
@@ -20,17 +20,17 @@ public class Purse {
 
     /**
      *  Create a purse with a specified capacity.
-     *  @param capacity is maximum number of coins you can put in purse.
+     *  @param capacity is maximum number of money you can put in purse.
      */
     public Purse(int capacity) {
         this.capacity = capacity;
-        money = new ArrayList<Coin>(capacity);
+        money = new ArrayList<Valuable>(capacity);
     }
 
     /**
-     * Count and return the number of coins in the purse.
-     * This is the number of coins, not their value.
-     * @return the number of coins in the purse
+     * Count and return the number of money in the purse.
+     * This is the number of cmoney, not their value.
+     * @return the number of money in the purse
      */
     public int count() { return money.size(); }
 
@@ -40,15 +40,15 @@ public class Purse {
      */
     public double getBalance() {
         double balance = 0;
-        for(Coin coin:money){
-            balance+=coin.getValue();
+        for(Valuable valuable:money){
+            balance+=valuable.getValue();
         }
 		return balance;
 	}
 
 
     /**
-     * Return the capacity of the coin purse.
+     * Return the capacity of the purse.
      * @return the capacity
      */
 
@@ -68,17 +68,17 @@ public class Purse {
     }
 
     /**
-     * Insert a coin into the purse.
-     * The coin is only inserted if the purse has space for it
-     * and the coin has positive value.  No worthless coins!
-     * @param coin is a Coin object to insert into purse
-     * @return true if coin inserted, false if can't insert
+     * Insert money into the purse.
+     * Money is only inserted if the purse has space for it
+     * and the money has positive value.  No worthless money!
+     * @param valuable is a Coin object to insert into purse
+     * @return true if money inserted, false if can't insert
      */
-    public boolean insert(Coin coin) {
+    public boolean insert(Valuable valuable) {
         // if the purse is already full then can't insert anything.
-        if(isFull() || coin.getValue() <= 0) return false;
+        if(isFull() || valuable.getValue() <= 0) return false;
 
-        money.add(coin);
+        money.add(valuable);
         return true;
     }
 
@@ -90,11 +90,12 @@ public class Purse {
      *  @return array of Coin objects for money withdrawn,
 	 *    or null if cannot withdraw requested amount.
      */
-    public Coin[] withdraw(double amount) {
+    public Valuable[] withdraw(double amount) {
 
-        List<Coin> templist = new ArrayList<>();
+        Comparator<Valuable> comp = new ValueComparator();
+        List<Valuable> templist = new ArrayList<>();
         if (amount > 0) {
-            java.util.Collections.sort(money);
+            java.util.Collections.sort(money,comp);
 
             double amountNeededToWithdraw = amount;
 
@@ -111,7 +112,7 @@ public class Purse {
 
         }else return null;
 
-        Coin [] array = new Coin[ templist.size() ];
+        Valuable [] array = new Valuable[ templist.size() ];
         templist.toArray(array);
 
 		for (int i = 0;  i < templist.size(); i++){
@@ -125,7 +126,7 @@ public class Purse {
      * It can return whatever is a useful description.
      */
     public String toString() {
-    	return String.format("%d coins with value %.2f", money.size(), getBalance());
+    	return String.format("%d money with value %.2f", money.size(), getBalance());
     }
 
 }

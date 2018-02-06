@@ -4,7 +4,7 @@ package coinpurse;
  * Coin represents coinage (money) with a fixed value and currency.
  * @author Pornpavee Seri-umnuoy
  */
-public class Coin implements  Comparable<Coin>{
+public class Coin implements Comparable<Coin>, Valuable{
 
     private final double value;
     private final String CURRENCY;
@@ -46,7 +46,7 @@ public class Coin implements  Comparable<Coin>{
     /**
      * Compare that 2 coins are the same or not.
      * @param obj the coin or object that you want to compare.
-     * @return 2 coins are the same, will return true.
+     * @return if 2 coins are the same, will return true.
      */
     @Override
     public boolean equals(Object obj) {
