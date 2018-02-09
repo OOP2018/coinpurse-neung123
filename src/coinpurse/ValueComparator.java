@@ -22,13 +22,12 @@ public class ValueComparator implements Comparator<Valuable> {
      */
 
     public int compare(Valuable a, Valuable b) {
-        if (a.getCurrency().length() == (b.getCurrency()).length() ) {
+        if (a.getCurrency().equals(b.getCurrency()) ) {
             if (a.getValue() < b.getValue()) return -1;
             else if (a.getValue() > b.getValue()) return 1;
             else return 0;
         }
-        else if(a.getCurrency().length() < b.getCurrency().length()) return -1;
-        else return 1;
+        else return a.getCurrency().compareTo(b.getCurrency());
     }
 
 }

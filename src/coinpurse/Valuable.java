@@ -7,7 +7,13 @@ package coinpurse;
 
 public interface Valuable {
 
+    /**
+     * @return the value of this Valuable.
+     */
     public double getValue();
 
+    /**
+     * @return the currency of this Valuable.
+     */
     public String getCurrency();
 }

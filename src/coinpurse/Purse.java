@@ -19,6 +19,11 @@ public class Purse {
     private final int capacity;
 
     /**
+     * Comparator for sorting Valuable.
+     */
+    Comparator<Valuable> comp = new ValueComparator();
+
+    /**
      *  Create a purse with a specified capacity.
      *  @param capacity is maximum number of money you can put in purse.
      */
@@ -92,7 +97,6 @@ public class Purse {
      */
     public Valuable[] withdraw(double amount) {
 
-        Comparator<Valuable> comp = new ValueComparator();
         List<Valuable> templist = new ArrayList<>();
         if (amount > 0) {
             java.util.Collections.sort(money,comp);
