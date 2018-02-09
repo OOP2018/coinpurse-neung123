@@ -26,6 +26,7 @@ public class BankNote extends Money {
 
     /**
      * get serialNumber of banknote
+     *
      * @return long value of serial number.
      */
     public long getSerial() {

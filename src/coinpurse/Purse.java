@@ -101,7 +101,6 @@ public class Purse {
         if (amount > 0) {
             java.util.Collections.sort(money,comp);
 
-
             double amountNeededToWithdraw = amount;
 
             for (int i = money.size()-1; i >= 0; i--) {

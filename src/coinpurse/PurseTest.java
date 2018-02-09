@@ -246,9 +246,6 @@ public class PurseTest {
 		purse.withdraw(new BankNote(100,"Baht"));
 		assertEquals(2, purse.getBalance(), TOL);
 
-
-
-
 	}
 }
 

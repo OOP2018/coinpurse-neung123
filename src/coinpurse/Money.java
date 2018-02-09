@@ -11,7 +11,6 @@ public class Money implements Valuable {
         this.currency = currency;
     }
 
-
     /**
      * A method to make Coin comparable.
      * @param o The coin that you want to compare its value with other

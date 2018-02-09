@@ -6,7 +6,6 @@ package coinpurse;
  */
 public class Coin extends Money {
 
-
     /**
      *  Initialize a new coin.
      * @param value is the value of this coin.

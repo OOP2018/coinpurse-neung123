@@ -29,7 +29,6 @@ public class MoneyUtil {
         for (Valuable v : valuables){
             System.out.println(v);
         }
-
         System.out.println("---------------");
     }
 
