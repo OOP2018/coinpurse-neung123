@@ -212,6 +212,44 @@ public class PurseTest {
 		for(Valuable c: coins) if (c != null) sum += c.getValue();
 		return sum;
 	}
+
+
+
+	@Test (timeout=1000)
+	public void customTest() {
+		Purse purse = new Purse(10);
+		purse.insert( new Coin(1,"Baht"));
+		purse.insert( new Coin(0.5,"Baht"));
+		purse.insert( new Coin(2,"Baht"));
+		purse.insert( new BankNote(100,"Baht"));
+
+
+
+		assertNull( purse.withdraw(new Coin(10,"BTC")));
+
+		purse.withdraw(new Coin(2,"BTC"));
+		assertEquals(103.5, purse.getBalance(), TOL);
+
+
+		purse.withdraw(new Coin(1,"Baht"));
+		assertEquals(102.5, purse.getBalance(), TOL);
+
+		purse.withdraw(new Coin(0.5,"Baht"));
+		assertEquals(102, purse.getBalance(), TOL);
+
+
+
+		purse.withdraw(new Coin(100,"Baht"));
+		assertEquals(102, purse.getBalance(), TOL);
+
+
+		purse.withdraw(new BankNote(100,"Baht"));
+		assertEquals(2, purse.getBalance(), TOL);
+
+
+
+
+	}
 }
 
 

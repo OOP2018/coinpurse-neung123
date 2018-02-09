@@ -34,7 +34,7 @@ public class Purse {
 
     /**
      * Count and return the number of money in the purse.
-     * This is the number of cmoney, not their value.
+     * This is the number of money, not their value.
      * @return the number of money in the purse
      */
     public int count() { return money.size(); }
@@ -101,6 +101,7 @@ public class Purse {
         if (amount > 0) {
             java.util.Collections.sort(money,comp);
 
+
             double amountNeededToWithdraw = amount;
 
             for (int i = money.size()-1; i >= 0; i--) {
@@ -125,12 +126,44 @@ public class Purse {
         return array;
 	}
 
+    public Valuable[] withdraw(Valuable amount) {
+        List<Valuable> templist = new ArrayList<>();
+        if (amount == null || amount.getValue() < 0) return null;
+
+            java.util.Collections.sort(money,comp);
+            java.util.Collections.reverse(money);
+
+            double amountNeededToWithdraw = amount.getValue();
+
+            for(Valuable valuable: money){
+                if(amount.getCurrency().equalsIgnoreCase(valuable.getCurrency()) && amount.getClass() == valuable.getClass()){
+                    if (amountNeededToWithdraw - valuable.getValue() >= 0) {
+                        amountNeededToWithdraw -= valuable.getValue();
+                        templist.add(valuable);
+                    }
+
+                    if (amountNeededToWithdraw == 0) break;
+                }
+            }
+            if (amountNeededToWithdraw != 0) return null;
+
+
+
+        Valuable [] array = new Valuable[ templist.size() ];
+        templist.toArray(array);
+
+        for (int i = 0;  i < templist.size(); i++){
+            money.remove( templist.get(i));
+        }
+        return array;
+    }
+
     /**
      * toString returns a string description of the purse contents.
      * It can return whatever is a useful description.
      */
     public String toString() {
-    	return String.format("%d money with value %.2f", money.size(), getBalance());
+    	return String.format("%d money with value %f bath", money.size(), getBalance());
     }
 
 }
