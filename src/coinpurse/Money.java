@@ -12,7 +12,9 @@ public class Money implements Valuable {
     }
 
     /**
-     * A method to make Coin comparable.
+     * A method to make Money comparable. Order items by its currency.
+     * If 2 objects have same currency, this method will order by its value.
+     *
      * @param o The coin that you want to compare its value with other
      * @return  0 if the first coin has order before the second coin.
      * > 0 if the first coin has order after the second coin.
@@ -20,9 +22,14 @@ public class Money implements Valuable {
      */
     @Override
     public int compareTo(Valuable o) {
-        if(this.getValue() - o.getValue() < 0) return -1;
-        else if(this.getValue() - o.getValue() > 0) return 1;
-        else return 0;
+
+        if(this.getCurrency().equalsIgnoreCase(o.getCurrency())){
+            if(this.getValue() - o.getValue() < 0) return -1;
+            else if(this.getValue() - o.getValue() > 0) return 1;
+            else return 0;
+        }
+        return this.getCurrency().compareToIgnoreCase(o.getCurrency());
+
 
     }
     /**

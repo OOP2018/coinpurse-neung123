@@ -89,42 +89,12 @@ public class Purse {
 
     /**
      *  Withdraw the requested amount of money.
-     *  Return an array of Coins withdrawn from purse,
+     *  Return an array of Valuable withdrawn from purse,
      *  or return null if cannot withdraw the amount requested.
      *  @param amount is the amount to withdraw
-     *  @return array of Coin objects for money withdrawn,
+     *  @return array of Valuable objects for money withdrawn,
 	 *    or null if cannot withdraw requested amount.
      */
-    public Valuable[] withdraw(double amount) {
-
-        List<Valuable> templist = new ArrayList<>();
-        if (amount > 0) {
-            java.util.Collections.sort(money,comp);
-
-            double amountNeededToWithdraw = amount;
-
-            for (int i = money.size()-1; i >= 0; i--) {
-                if (amountNeededToWithdraw - money.get(i).getValue() >= 0) {
-                    amountNeededToWithdraw -= money.get(i).getValue();
-                    templist.add(money.get(i));
-                }
-
-                if (amountNeededToWithdraw == 0) break;
-            }
-
-            if (amountNeededToWithdraw != 0) return null;
-
-        }else return null;
-
-        Valuable [] array = new Valuable[ templist.size() ];
-        templist.toArray(array);
-
-		for (int i = 0;  i < templist.size(); i++){
-		    money.remove( templist.get(i));
-        }
-        return array;
-	}
-
     public Valuable[] withdraw(Valuable amount) {
         List<Valuable> templist = new ArrayList<>();
         if (amount == null || amount.getValue() < 0) return null;
@@ -155,6 +125,16 @@ public class Purse {
             money.remove( templist.get(i));
         }
         return array;
+    }
+
+    /**
+     * Same as withdraw(Valuable amount) but has the default currency,Baht.
+     * @param amount is the amount to withdraw
+     * @return array of Valuable objects for money withdrawn,
+     *    or null if cannot withdraw requested amount.
+     */
+    public Valuable[] withdraw(double amount) {
+        return withdraw(new Money(amount, "Baht"));
     }
 
     /**
