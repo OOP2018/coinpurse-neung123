@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class ConsoleDialog {
 	// default currency for this dialog
-	public static final String CURRENCY = "Baht";
+	public String currency = "Baht";
     // use a single java.util.Scanner object for reading all input
     private static Scanner console = new Scanner( System.in );
     // Long prompt shown the first time
@@ -24,12 +24,15 @@ public class ConsoleDialog {
     // so don't create a Purse here.
     private Purse purse;
 
+    private MoneyFactory moneyFactory = MoneyFactory.getInstance();
+
     /**
      * Initialize a new Purse dialog.
      * @param purse is the Purse to interact with.
      */
-    public ConsoleDialog(Purse purse ) {
-    	this.purse = purse;
+    public ConsoleDialog(Purse purse,String currency) {
+        this.purse = purse;
+        this.currency = currency;
     }
 
     /** Run the user interface. */
@@ -37,7 +40,7 @@ public class ConsoleDialog {
         String choice = "";
         String prompt = FULL_PROMPT;
         loop: while( true ) {
-            System.out.printf("Purse contains %.2f %s\n", purse.getBalance(), CURRENCY );
+            System.out.printf("Purse contains %.2f %s\n", purse.getBalance(), currency );
             if ( purse.isFull() ) System.out.println("Purse is FULL.");
             // print a list of choices
             System.out.print(prompt);
@@ -63,7 +66,7 @@ public class ConsoleDialog {
             	prompt = FULL_PROMPT;
             }
         }
-        System.out.println("Goodbye. The purse still has "+purse.getBalance()+" "+CURRENCY);
+        System.out.println("Goodbye. The purse still has "+purse.getBalance()+" "+currency);
     }
 
     /**
@@ -84,7 +87,13 @@ public class ConsoleDialog {
         Scanner scanline = new Scanner(inline);
         while( scanline.hasNextDouble() ) {
             double value = scanline.nextDouble();
-            Valuable valuable = makeMoney(value);
+            Valuable valuable;
+            try {
+                valuable = moneyFactory.createMoney( value );
+            } catch (IllegalArgumentException ex) {
+                System.out.println("Sorry, "+value+" is not a valid amount.");
+                continue;
+            }
             System.out.printf("Deposit %s... ", valuable.toString() );
             boolean ok = purse.insert(valuable);
             System.out.println( (ok? "ok" : "FAILED") );
@@ -112,7 +121,7 @@ public class ConsoleDialog {
              double amount = scanline.nextDouble( );
              Valuable [] valuables = purse.withdraw(amount);
              if ( valuables == null )
-                System.out.printf("Sorry, couldn't withdraw %.2g %s\n", amount, CURRENCY);
+                System.out.printf("Sorry, couldn't withdraw %.2g %s\n", amount, currency);
              else {
                 System.out.print("You withdrew:");
                 for(int k=0; k<valuables.length; k++) {
@@ -123,13 +132,6 @@ public class ConsoleDialog {
         }
         else System.out.printf("Invalid amount: "+inline );
         scanline.close();
-    }
-
-    /** Make a Coin (or BankNote or whatever) using requested value. */
-    private Valuable makeMoney(double value) {
-
-        if(value>=20) return new BankNote(value, CURRENCY);
-        else return new Coin(value, CURRENCY);
     }
 
 }

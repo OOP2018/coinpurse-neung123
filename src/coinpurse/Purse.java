@@ -18,6 +18,8 @@ public class Purse {
      */
     private final int capacity;
 
+    private String currency = "Baht";
+
     /**
      * Comparator for sorting Valuable.
      */
@@ -27,8 +29,9 @@ public class Purse {
      *  Create a purse with a specified capacity.
      *  @param capacity is maximum number of money you can put in purse.
      */
-    public Purse(int capacity) {
+    public Purse(int capacity,String currency) {
         this.capacity = capacity;
+        this.currency = currency;
         money = new ArrayList<Valuable>(capacity);
     }
 
@@ -98,15 +101,17 @@ public class Purse {
     public Valuable[] withdraw(Valuable amount) {
         List<Valuable> templist = new ArrayList<>();
         if (amount == null || amount.getValue() < 0) return null;
-
             java.util.Collections.sort(money,comp);
             java.util.Collections.reverse(money);
 
             double amountNeededToWithdraw = amount.getValue();
 
             for(Valuable valuable: money){
-                if(amount.getCurrency().equalsIgnoreCase(valuable.getCurrency()) && amount.getClass() == valuable.getClass()){
+
+                if(amount.getCurrency().equalsIgnoreCase(valuable.getCurrency())){
+
                     if (amountNeededToWithdraw - valuable.getValue() >= 0) {
+
                         amountNeededToWithdraw -= valuable.getValue();
                         templist.add(valuable);
                     }
@@ -134,7 +139,7 @@ public class Purse {
      *    or null if cannot withdraw requested amount.
      */
     public Valuable[] withdraw(double amount) {
-        return withdraw(new Money(amount, "Baht"));
+        return withdraw(new Money(amount, currency));
     }
 
     /**
@@ -142,7 +147,7 @@ public class Purse {
      * It can return whatever is a useful description.
      */
     public String toString() {
-    	return String.format("%d money with value %f bath", money.size(), getBalance());
+    	return String.format("%d money with value %f %s", money.size(), getBalance(),currency);
     }
 
 }
