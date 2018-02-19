@@ -1,10 +1,4 @@
 package coinpurse;
-
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
-import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 /**
@@ -29,6 +23,10 @@ public class Main {
 
     }
 
+    /**
+     * Method for setting Moneyfactory reference to purse.properties
+     * @return currency from purse.properties
+     */
     public static String init() {
 
         ResourceBundle bundle = ResourceBundle.getBundle( "purse" );

@@ -1,5 +1,11 @@
 package coinpurse;
 
+/**
+ * Money class, has its own value and currency.
+ *
+ * @author Pornpavee Seri-umnuoy
+ */
+
 public class Money implements Valuable {
 
     private double value;

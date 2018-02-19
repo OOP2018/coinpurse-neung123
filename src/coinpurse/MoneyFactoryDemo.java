@@ -1,7 +1,16 @@
 package coinpurse;
 
+/**
+ * A class for create a MoneyFactory and call its methods
+ * for testing that it works properly or not.
+ *
+ * @author Pornpavee Seri-umnuoy
+ */
 public class MoneyFactoryDemo {
 
+    /**
+     * Main for running this whole class.
+     */
     public static void main(String[] args){
         factoryTest();
         System.out.println("Thailand ------> Malaysia");
@@ -9,6 +18,9 @@ public class MoneyFactoryDemo {
         factoryTest();
     }
 
+    /**
+     * A method for create a MoneyFactory and call its methods for testing.
+     */
 
     public static void factoryTest(){
         MoneyFactory f1 = MoneyFactory.getInstance();
