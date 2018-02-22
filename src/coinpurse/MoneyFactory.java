@@ -41,8 +41,8 @@ public abstract class MoneyFactory {
          double numberValue;
       try {
             numberValue = Double.parseDouble(value);
-        } catch (IllegalArgumentException ex) {
-            throw new IllegalArgumentException(value + " isn't a number");
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Value cannot be parsed to number(Double)",e);
       }
         return createMoney( numberValue );
     }
