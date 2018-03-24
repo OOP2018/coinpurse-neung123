@@ -29,6 +29,11 @@ public class Purse {
      *  Create a purse with a specified capacity.
      *  @param capacity is maximum number of money you can put in purse.
      */
+    public Purse(int capacity) {
+        this.capacity = capacity;
+        money = new ArrayList<Valuable>(capacity);
+    }
+
     public Purse(int capacity,String currency) {
         this.capacity = capacity;
         this.currency = currency;
